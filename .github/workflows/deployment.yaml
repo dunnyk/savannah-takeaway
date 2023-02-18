@@ -48,3 +48,27 @@ jobs:
       - name: Run unit tests
         run: coverage run manage.py test --verbosity=2 && coverage report -m
 
+  deploy-prod:
+    needs: [tests]
+    runs-on: ubuntu-latest
+    # if: github.ref_name == 'main'
+
+    steps:
+      - name: Checkout Source code
+        uses: actions/checkout@v2
+
+      - name: Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*'
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v20
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+          application_name: savannah
+          environment_name: Savannah-env
+
+          version_label: ${{ github.sha }}
+          region: "ap-northeast-1"
+          deployment_package: deploy.zip
