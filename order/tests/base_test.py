@@ -1,4 +1,3 @@
-from matplotlib.pyplot import cla
 from rest_framework.test import APITestCase
 from rest_framework.reverse import reverse as api_reverse
 
@@ -15,7 +14,7 @@ class TestBaseCase(APITestCase):
         # setup user login credentials
 
         # get token from the login method
-        self.token = login_user()
+        self.token = self.login_user()
 
 
     def login_user(self):

@@ -5,6 +5,8 @@ certifi==2022.12.7
 cffi==1.15.1
 charset-normalizer==3.0.1
 contextlib2==21.6.0
+coverage==7.1.0
+coverage-badge==1.1.0
 cryptography==39.0.1
 Deprecated==1.2.13
 Django==4.1.6
