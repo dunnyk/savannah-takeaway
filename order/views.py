@@ -38,7 +38,7 @@ class OrderCreateListView(generics.ListCreateAPIView):
         data = serializer.data
         return_feedback = {
             "message": "You retrieved your orders successfully",
-            "data": serializer.data
+            "data": data
         }
         return Response(return_feedback, status.HTTP_200_OK)
 

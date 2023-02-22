@@ -94,4 +94,4 @@ class User(AbstractBaseUser, PermissionsMixin):
             'username': self.username
         }
         token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
-        return token
+        return token.decode()

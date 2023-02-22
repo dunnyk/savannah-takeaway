@@ -19,6 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('authenticate/', include(('authentication.urls', 'autentication'), namespace='authentication')),
-    path('userOrder/', include(('order.urls','orders'), namespace='orders')),
+    path('userOrder/', include(('order.urls','orders'), namespace='order')),
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]

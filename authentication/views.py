@@ -6,8 +6,6 @@ from rest_framework import status
 from rest_framework.response import Response
 
 
-import jwt
-from datetime import datetime, timedelta
 
 from .serializers import RegistrationSerializer, LoginSerializer
 from .models import User
@@ -31,15 +29,16 @@ class RegistrationAPIView(generics.CreateAPIView):
 
 class LoginAPIView(generics.CreateAPIView):
     '''
-        anyone is allowed to do this(AllowAny)
-        but to enter in you should give matching details.
+        Hit this endpoint, only if you have logged in.
     '''
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     serializer_class = LoginSerializer
 
     def post(self, request):
         """Handle user login
         """
+        # breakpoint()
+        # self.request.user.token.decode('utf-8')
         user = request.data
         serializer = self.serializer_class(data=user)
         serializer.is_valid(raise_exception=True)
