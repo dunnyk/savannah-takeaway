@@ -93,7 +93,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'username', 'password', 'phone_number']
+        fields = ['first_name', 'last_name', 'email',
+                  'username', 'password', 'phone_number']
 
 
 class LoginSerializer(serializers.Serializer):
@@ -131,4 +132,5 @@ class LoginSerializer(serializers.Serializer):
 class UserRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'username', 'phone_number']
+        fields = ['first_name', 'last_name',
+                  'email', 'username', 'phone_number']

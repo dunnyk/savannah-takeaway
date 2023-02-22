@@ -1,6 +1,6 @@
 #!/bin/bash
-source /root/.local/share/virtualenvs/app-*/bin/activate
-export $(grep -v '^#' .env.dev | xargs)
+
+export $(grep -v '^#' .env.docker | xargs)
 
 
 echo $CURRENT_UID

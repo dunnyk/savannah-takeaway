@@ -1,7 +1,7 @@
 
 from django.conf import settings
 from rest_framework import serializers
-from .models import Order,User
+from .models import Order, User
 from authentication.serializers import UserRetrieveSerializer
 
 

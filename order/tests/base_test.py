@@ -26,10 +26,9 @@ class TestBaseCase(APITestCase):
 
         # setup user login credentials
         self.valid_user_login_details = {
-            "email":"arrow1@gmail.com",
-            "password":"Pass@123",
+            "email": "arrow1@gmail.com",
+            "password": "Pass@123",
         }
-
 
         # get token from the login method
         self.token = self.login_user()
@@ -43,29 +42,25 @@ class TestBaseCase(APITestCase):
             'item': 'Another Test Item'
         }
 
-
-
     def login_user(self):
         """login user and return token"""
         token = self.customer.token
         # response = self.client.post(self.login_url, self.valid_user_login_details, format='json')
         return token
 
-
-
     def create_valid_order(self):
         """Create a new order, remember to pass the token"""
 
         response = self.client.post(self.create_order_url, self.valid_order_data, format='json',
-        HTTP_AUTHORIZATION='token {}'.format(self.token))
+                                    HTTP_AUTHORIZATION='token {}'.format(self.token))
 
         return response
-
 
     def create_order_without_token(self):
         """Create a new order, remember to pass the token"""
 
-        response = self.client.post(self.create_order_url, self.valid_order_data, format='json')
+        response = self.client.post(
+            self.create_order_url, self.valid_order_data, format='json')
 
         return response
 
@@ -73,14 +68,15 @@ class TestBaseCase(APITestCase):
         """Create a new order, remember to pass the token"""
 
         response = self.client.post(self.create_order_url, self.invalid_order_data, format='json',
-        HTTP_AUTHORIZATION='token {}'.format(self.token))
+                                    HTTP_AUTHORIZATION='token {}'.format(self.token))
 
         return response
 
     def retrieve_single_order(self):
         self.create_valid_order()
 
-        order = Order.objects.filter(item=self.valid_order_data['item']).first()
+        order = Order.objects.filter(
+            item=self.valid_order_data['item']).first()
         response = self.client.get(
             api_reverse('order:retrieve-order', args=[order.id]),
             HTTP_AUTHORIZATION='token {}'.format(self.token))

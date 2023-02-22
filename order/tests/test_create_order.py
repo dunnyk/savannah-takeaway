@@ -19,7 +19,8 @@ class OrderTest(TestBaseCase):
         res = response.data
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.assertIn('detail', res)
-        self.assertEqual(res['detail'], 'Authentication credentials were not provided.')
+        self.assertEqual(
+            res['detail'], 'Authentication credentials were not provided.')
 
     def test_create_order_with_invalid_details_fails(self):
         response = self.create_order_with_invalid_details()

@@ -121,6 +121,9 @@ celerybeat.pid
 
 # Environments
 .env
+.env.dev
+Pipfile
+Pipfile.lock
 .venv
 env/
 venv/

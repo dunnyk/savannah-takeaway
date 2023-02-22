@@ -1,0 +1,8 @@
+export SECRET_KEY=''
+export DEBUG=True
+export DB_NAME=''
+export DB_PASS=''
+export DB_HOST=''
+export DB_PORT=''
+export DB_USER=''
+export AT_API_KEY=""

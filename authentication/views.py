@@ -6,7 +6,6 @@ from rest_framework import status
 from rest_framework.response import Response
 
 
-
 from .serializers import RegistrationSerializer, LoginSerializer
 from .models import User
 
@@ -31,7 +30,7 @@ class LoginAPIView(generics.CreateAPIView):
     '''
         Hit this endpoint, only if you have logged in.
     '''
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     serializer_class = LoginSerializer
 
     def post(self, request):

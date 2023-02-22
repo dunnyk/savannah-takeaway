@@ -58,7 +58,7 @@ class OrderGetUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
         return Response(return_feedback, status.HTTP_200_OK)
 
     def patch(self, request, order_id):
-        order = Order.objects.get(pk=order_id)
+        order = get_object_or_404(Order, pk=order_id)
         data = request.data
         serializer = self.serializer_class(order, data, partial=True)
         serializer.is_valid(raise_exception=True)
@@ -71,7 +71,7 @@ class OrderGetUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
         return Response(return_feedback, status.HTTP_201_CREATED)
 
     def delete(self, request, order_id):
-        order = Order.objects.get(pk=order_id)
+        order = get_object_or_404(Order, pk=order_id)
         order.delete()
         serializer = self.serializer_class(order)
         return_feedback = {

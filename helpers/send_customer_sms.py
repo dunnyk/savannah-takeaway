@@ -2,6 +2,7 @@ import africastalking
 import os
 from django.conf import settings
 
+
 def send_sms(phone_number):
     username = "sandbox"
 

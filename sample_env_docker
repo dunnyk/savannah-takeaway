@@ -1,0 +1,8 @@
+export SECRET_KEY=''
+export DEBUG=True
+export DB_NAME='postgres'
+export DB_PASS='postgres'
+export DB_USER='postgres'
+export DB_HOST='database'
+export DB_PORT='5432'
+export AT_API_KEY=""
