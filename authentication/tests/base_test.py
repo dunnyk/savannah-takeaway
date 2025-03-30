@@ -5,8 +5,8 @@ from rest_framework.reverse import reverse as api_reverse
 class TestBaseCase(APITestCase):
 
     def setUp(self):
-        self.signup_url = api_reverse('authentication:customers-signup')
-        self.login_url = api_reverse('authentication:customer-login')
+        self.signup_url = api_reverse("authentication:customers-signup")
+        self.login_url = api_reverse("authentication:customer-login")
 
         self.valid_user = {
             "first_name": "gg",
@@ -14,7 +14,7 @@ class TestBaseCase(APITestCase):
             "email": "g@gmail.com",
             "username": "gg",
             "password": "Pass@123",
-            "phone_number": "+25406193094"
+            "phone_number": "+25406193094",
         }
 
         self.user_missing_email = {
@@ -22,7 +22,7 @@ class TestBaseCase(APITestCase):
             "last_name": "gm",
             "username": "gg",
             "password": "Pass@123",
-            "phone_number": "+25406193094"
+            "phone_number": "+25406193094",
         }
 
         self.user_invalid_pass = {
@@ -31,7 +31,7 @@ class TestBaseCase(APITestCase):
             "username": "gg",
             "email": "g@gmail.com",
             "password": "Pas",
-            "phone_number": "+25406193094"
+            "phone_number": "+25406193094",
         }
 
         self.user_invalid_username = {
@@ -39,7 +39,7 @@ class TestBaseCase(APITestCase):
             "last_name": "gm",
             "email": "g@gmail.com",
             "password": "Pass@123",
-            "phone_number": "+25406193094"
+            "phone_number": "+25406193094",
         }
 
         self.user_missing_first_name = {
@@ -47,7 +47,7 @@ class TestBaseCase(APITestCase):
             "email": "g@gmail.com",
             "username": "gg",
             "password": "Pass@123",
-            "phone_number": "+25406193094"
+            "phone_number": "+25406193094",
         }
 
         self.user_missing_last_name = {
@@ -55,35 +55,80 @@ class TestBaseCase(APITestCase):
             "email": "g@gmail.com",
             "username": "gg",
             "password": "Pass@123",
-            "phone_number": "+25406193094"
+            "phone_number": "+25406193094",
         }
 
     def signup_user(self):
         response = self.client.post(
-            self.signup_url, self.valid_user, format='json')
+            self.signup_url, self.valid_user, format="json")
         return response
 
     def signup_user_without_email(self):
         response = self.client.post(
-            self.signup_url, self.user_missing_email, format='json')
+            self.signup_url, self.user_missing_email, format="json"
+        )
         return response
 
     def signup_user_with_invalid_password(self):
         response = self.client.post(
-            self.signup_url, self.user_invalid_pass, format='json')
+            self.signup_url, self.user_invalid_pass, format="json"
+        )
         return response
 
     def signup_user_without_username(self):
         response = self.client.post(
-            self.signup_url, self.user_invalid_username, format='json')
+            self.signup_url, self.user_invalid_username, format="json"
+        )
         return response
 
     def signup_user_without_first_name(self):
         response = self.client.post(
-            self.signup_url, self.user_missing_first_name, format='json')
+            self.signup_url, self.user_missing_first_name, format="json"
+        )
         return response
 
     def signup_user_without_last_name(self):
         response = self.client.post(
-            self.signup_url, self.user_missing_last_name, format='json')
+            self.signup_url, self.user_missing_last_name, format="json"
+        )
+        return response
+
+
+class TestBaseCaseLogin(APITestCase):
+
+    def setUp(self):
+        self.login_url = api_reverse("authentication:customer-login")
+
+        self.valid_login = {
+            "email": "g@gmail.com",
+            "password": "Pass@123",
+        }
+
+        self.user_missing_email = {"password": "Pass@123"}
+
+        self.user_missing_password = {"email": "g@gmail.com"}
+
+        self.user_missing_email_and_password = {"email": "", "password": ""}
+
+    def valid_login(self):
+        response = self.client.post(
+            self.login_url, self.valid_login, format="json")
+        return response
+
+    def user_missing_email(self):
+        response = self.client.post(
+            self.login_url, self.user_missing_email, format="json"
+        )
+        return response
+
+    def user_login_missing_password(self):
+        response = self.client.post(
+            self.login_url, self.user_missing_password, format="json"
+        )
+        return response
+
+    def user_login_missing_email_and_password(self):
+        response = self.client.post(
+            self.login_url, self.user_missing_email_and_password, format="json"
+        )
         return response

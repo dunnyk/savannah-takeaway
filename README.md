@@ -71,7 +71,6 @@
 - copy sample env variables from sample_env_docker file, paste them in your `.env.docker` file and replace the empty variable with your credentials
 - `docker-compose up --build`
 
-
 ## Project Endpoints
 
 - This is a web app that allows users to:

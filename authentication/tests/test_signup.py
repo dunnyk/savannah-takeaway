@@ -1,5 +1,4 @@
-
-from .base_test import TestBaseCase
+from .base_test import TestBaseCase, TestBaseCaseLogin
 from rest_framework import status
 
 
@@ -9,34 +8,64 @@ class RegistrationTest(TestBaseCase):
         response = self.signup_user()
         res = response.data
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertIn('email', res)
+        self.assertIn("email", res)
 
     def test_signup_user_without_email_fails(self):
         response = self.signup_user_without_email()
         res = response.data
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn('errors', res)
+        self.assertIn("errors", res)
 
     def test_signup_user_invalid_password_fails(self):
         response = self.signup_user_with_invalid_password()
         res = response.data
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn('errors', res)
+        self.assertIn("errors", res)
 
     def test_signup_user_without_username_fails(self):
         response = self.signup_user_without_username()
         res = response.data
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn('errors', res)
+        self.assertIn("errors", res)
 
     def test_signup_user_without_first_name(self):
         response = self.signup_user_without_first_name()
         result = response.data
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn('errors', result)
+        self.assertIn("errors", result)
 
     def test_signup_user_without_last_name(self):
         response = self.signup_user_without_last_name()
         result = response.data
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn('errors', result)
+        self.assertIn("errors", result)
+
+
+class LoginTest(TestBaseCaseLogin):
+
+    def test_valid_login(self):
+        response = self.valid_login()
+        result = response.data
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("email", result)
+
+    def test_user_missing_email(self):
+        response = self.user_missing_email()
+        result = response.data
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertNotEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("error", result)
+
+    def test_user_login_missing_password(self):
+        response = self.user_login_missing_password()
+        result = response.data
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("errors", result)
+        self.assertNotEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_user_login_missing_email_and_password(self):
+        response = self.user_login_missing_email_and_password()
+        result = response.data
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("errors", result)
+        self.assertNotEqual(response.status_code, status.HTTP_200_OK)

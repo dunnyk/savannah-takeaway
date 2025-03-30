@@ -15,14 +15,12 @@ class JWTAuthentication(authentication.BaseAuthentication):
         """
 
         # Get the passed token
-        auth_header = authentication.get_authorization_header(
-            request).decode('utf-8')
-        if not auth_header or auth_header.split()[0].lower() != 'token':
+        auth_header = authentication.get_authorization_header(request).decode("utf-8")
+        if not auth_header or auth_header.split()[0].lower() != "token":
             return None
         token = auth_header.split(" ")[1]
         # Attempt decoding the token
         user = get_token_data(token)
         # Check this user is activated
-
 
         return (user, token)

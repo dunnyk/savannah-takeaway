@@ -1,4 +1,3 @@
-
 from django.conf import settings
 from rest_framework import serializers
 from .models import Order, User
@@ -10,7 +9,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['customer', 'item', 'amount', 'create_at']
+        fields = ["customer", "item", "amount", "create_at"]
 
 
 class OrderGetUpdateDestroySerializer(serializers.ModelSerializer):
@@ -25,4 +24,4 @@ class OrderGetUpdateDestroySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['customer', 'item', 'amount']
+        fields = ["customer", "item", "amount"]
